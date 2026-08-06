@@ -7,25 +7,26 @@ interface IProps{
     id: string,
     type?: "text" | "email" | "password" | "number",
     placeholder: string,
-    // onChange?: (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=> void,
-    // value: string,
     register: UseFormRegister<any>
+    error?: string
 }
-const Input: FC<IProps> = ({ register,id, label, name, placeholder, type = "text"}) => {
+const Input: FC<IProps> = ({ error, register,id, label, name, placeholder, type = "text"}) => {
   return (
     <div className="flex flex-col gap-2">
         <label className=" text-[18px] font-[600]" htmlFor={id}>{label}</label>
         <input
-            // onChange={(e)=>{}}
-            {...register(name)}
-            // onChange={onChange}
+            {...register(name, {required: true})}
             id= {id}
-            // name= {name}
             type= {type}
             placeholder= {placeholder}
             // value={value}
-            className="py-2.5 border border-primary px-2 rounded-sm focus:outline-primary text-[18px] placeholder:text-[18px]"
-        />
+            className={`accent-primary py-3.5 border px-2 text-sm placeholder:text-sm 
+              ${error? 'border-red-500 focus:outline-red-500': 'border-primary focus:outline-primary-active'} px-2 rounded-sm 
+             `}
+          />
+        <small
+          className="h-5 text-red-500 text-xs"
+        >{error}</small>
     </div>
   )
 }
