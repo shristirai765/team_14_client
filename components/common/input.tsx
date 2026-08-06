@@ -1,0 +1,30 @@
+import { FC } from "react"
+
+interface IProps{
+    label: string,
+    name: string,
+    id: string,
+    type?: "text" | "email" | "password" | "number",
+    placeholder: string,
+    onChange: (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=> void,
+    value?: string
+}
+const Input: FC<IProps> = ({onChange, value, id, label, name, placeholder, type = "text"}) => {
+  return (
+    <div className="flex flex-col gap-2">
+        <label className=" text-[18px] font-[600]" htmlFor={id}>{label}</label>
+        <input
+            // onChange={(e)=>{}}
+            onChange={onChange}
+            id= {id}
+            name= {name}
+            type= {type}
+            placeholder= {placeholder}
+            value={value}
+            className="py-2.5 border border-primary px-2 rounded-sm focus:outline-primary text-[18px] placeholder:text-[18px]"
+        />
+    </div>
+  )
+}
+
+export default Input
