@@ -2,33 +2,31 @@
 
 import Button from '@/components/common/button'
 import Input from '@/components/common/input'
-import { useState } from 'react'
+// import { useState } from 'react'
+import {useForm} from "react-hook-form";
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: ""
+  
+  const {register, watch, handleSubmit} = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
   })
-  const onChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
-    const value = e.target.value;
-    const name = e.target.name;
-    setFormData((prev)=>{
-      return {
-        ...prev,
-        [name]: value
-      }
-    })
-  }
+ 
+   const onSubmit = ((data: {email:string, password:string})=>{
+    console.log("login submitted", data);
+
+  })
   return (
-    <form className='flex flex-col gap-6'  >
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'  >
         <Input
           label='Email'
           placeholder='johndoe@gmail.com'
           type='email'
           name='email'
           id='email'
-          value= {formData.email}
-          onChange={onChange}
+          register={register}
         />
         <Input
           label='Password'
@@ -36,8 +34,7 @@ const LoginForm = () => {
           type='password'
           name='password'
           id='password'
-          value= {formData.password}
-          onChange={onChange}
+          register={register}
         />
         <div className='mt-5'>
           <Button

@@ -9,7 +9,8 @@ const RegisterForm = () => {
         full_name: "",
         phone: "",
         email: "",
-        password: ""
+        password: "",
+        c_password: ""
       })
       const onChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
         const value = e.target.value;
@@ -21,8 +22,13 @@ const RegisterForm = () => {
           }
         })
       }
+       const onSubmit = ((e: React.SubmitEvent<HTMLFormElement>)=>{
+          e.preventDefault();
+          console.log("account created", formData);
+
+        })
   return (
-    <form >
+    <form onSubmit={onSubmit} className='flex flex-col gap-6' >
         <Input
             label="Full Name"
             id="full_name"
@@ -57,6 +63,15 @@ const RegisterForm = () => {
           name='password'
           id='password'
           value= {formData.password}
+          onChange={onChange}
+        />
+        <Input
+          label='Confirm Password'
+          placeholder='Enter your password again'
+          type='password'
+          name='c_password'
+          id='c_password'
+          value= {formData.c_password}
           onChange={onChange}
         />
         <div className='mt-5'>
