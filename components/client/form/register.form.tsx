@@ -2,50 +2,49 @@
 
 import Button from "@/components/common/button";
 import Input from "@/components/common/input";
-import { useState } from "react";
+import { registerSchema } from "@/schemas/register.schema";
+import { TRegister } from "@/types/register.type";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const RegisterForm = () => {
-    const [formData, setFormData] = useState({
-        full_name: "",
-        phone: "",
-        email: "",
-        password: "",
-        c_password: ""
-      })
-      const onChange = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
-        const value = e.target.value;
-        const name = e.target.name;
-        setFormData((prev)=>{
-          return {
-            ...prev,
-            [name]: value
-          }
+
+        const {register, handleSubmit, formState: {errors}} = useForm({
+          defaultValues: {
+            full_name: "",
+            phone: "",
+            email: "",
+            password: "",
+            c_password: ""
+          },
+          resolver: yupResolver(registerSchema),
         })
-      }
-       const onSubmit = ((e: React.SubmitEvent<HTMLFormElement>)=>{
-          e.preventDefault();
-          console.log("account created", formData);
+  
+       const onSubmit = ((data: TRegister )=>{
+         console.log("account created", data);
 
         })
   return (
-    <form onSubmit={onSubmit} className='flex flex-col gap-6' >
+    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-1' >
         <Input
             label="Full Name"
             id="full_name"
             type="text"
             name="full_name"
             placeholder="John Doe"
-            value= {formData.full_name}
-            onChange={onChange}
+            error= {errors?.full_name?.message}
+            register={register}
+            required
         />
         <Input
             label="Phone Number"
             id="phone"
-            type="number"
+            // type="number"
             name="phone"
             placeholder="9800000000"
-            value= {formData.phone}
-            onChange={onChange}
+            error= {errors?.phone?.message}
+            register={register}
+            required
         />
         <Input
           label='Email'
@@ -53,8 +52,9 @@ const RegisterForm = () => {
           type='email'
           name='email'
           id='email'
-          value= {formData.email}
-          onChange={onChange}
+          error= {errors?.email?.message}
+          register={register}
+          required
         />
         <Input
           label='Password'
@@ -62,8 +62,9 @@ const RegisterForm = () => {
           type='password'
           name='password'
           id='password'
-          value= {formData.password}
-          onChange={onChange}
+          error= {errors?.password?.message}
+          register={register}
+          required
         />
         <Input
           label='Confirm Password'
@@ -71,8 +72,9 @@ const RegisterForm = () => {
           type='password'
           name='c_password'
           id='c_password'
-          value= {formData.c_password}
-          onChange={onChange}
+          error= {errors?.c_password?.message}
+          register={register}
+          required
         />
         <div className='mt-5'>
           <Button

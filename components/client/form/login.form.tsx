@@ -37,6 +37,7 @@ const LoginForm = () => {
           id='email'
           error= {errors?.email?.message}
           register={register}
+          required
         />
         <Input
           label='Password'
@@ -46,6 +47,7 @@ const LoginForm = () => {
           id='password'
           error= {errors?.password?.message}
           register={register}
+          required
         />
         <div className='mt-5'>
           <Button

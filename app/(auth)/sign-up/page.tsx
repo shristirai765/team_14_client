@@ -8,26 +8,29 @@ export const metadata: Metadata = {
 };
 
 const SignUpPage = () => {
-  return (
-     <main className="bg-violet-50 min-h-full flex justify-center items-center">
-      <section className="shadow-sm shadow-primary-hover border border-primary min-h-100 min-w-100 px-10 py-8 rounded-md flex flex-col gap-5">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-bold text-primary">Create Account</h1>
-          <p className="text-xl">Welcome </p>
+    return (
+        <main className='bg-white min-h-full flex justify-center items-center'>
+            <section className='shadow-sm shadow-primary-shadow border border-primary min-h-100 min-w-130 px-8 py-8 rounded-md flex flex-col gap-5'>
+                {/* page heading */}
+                <div className='flex flex-col gap-1'>
+                    <h1 className='text-3xl font-bold text-primary'>Create Account</h1>
+                    <p className='text-lg'>Welcome</p>
+                </div>
 
-        </div>
-        {/* register form */}
-        <RegisterForm/>
+                {/* register form */}
+                <RegisterForm />
 
-        {/* link to signup page */}
-        <div className="-mt-5">
-          <p className="text-center text-[14px]">
-           Already have an account? <Link title="go to sign up page" className="text-primary italic font-semibold" href={'/login'}> Sign In</Link>
-          </p>
-        </div>
-      </section>
-    </main>
-  )
+                {/* link to signup page */}
+                <div className='-mt-4'>
+
+                    <p className='text-center text-[14px]'>
+                        Already have an Account? <Link title='go to login page' className='text-primary italic  font-semibold' href={'/login'}>Sign In</Link>
+                    </p>
+                </div>
+            </section>
+
+        </main>
+    )
 }
 
 export default SignUpPage
