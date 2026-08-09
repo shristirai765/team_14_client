@@ -1,5 +1,6 @@
 
 import LoginForm from "@/components/client/form/login.form";
+import {  QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -8,12 +9,16 @@ export const metadata: Metadata = {
   description: "Ecommerce Login page",
 }; 
 
+const client = ()=>{
+  
+}
 const LoginPage = () => {
   // const handleSubmit = (e: any)=>{
   //   e.preventDefault();
   //   console.log("Form submitted successfullt.", e.target.value);
 
   // }
+  const queryClient = new QueryClient();
   return (
 
     <main className="bg-violet-50 min-h-full flex justify-center items-center">
@@ -24,7 +29,8 @@ const LoginPage = () => {
 
         </div>
         {/* login form */}
-        <LoginForm/>
+          <LoginForm/>
+      
 
         {/* link to signup page */}
         <div className="-mt-5">

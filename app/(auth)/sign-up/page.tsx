@@ -1,4 +1,5 @@
 import RegisterForm from "@/components/client/form/register.form";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { Metadata } from "next"
 import Link from "next/link";
 
@@ -18,7 +19,8 @@ const SignUpPage = () => {
                 </div>
 
                 {/* register form */}
-                <RegisterForm />
+                    <RegisterForm />
+                
 
                 {/* link to signup page */}
                 <div className='-mt-4'>

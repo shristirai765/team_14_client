@@ -43,7 +43,7 @@ const Input: FC<IProps> = ({ id, label, name, placeholder, type = 'text', regist
                     // type= {type}
                     
                 />
-                <div className='size-5 p-auto'>
+                <div className='text-md size-8 mr-0 '>
                     {type === "password" && (showPassword ? <MdOutlineRemoveRedEye onClick={onClick}/> : <LuEyeClosed onClick={onClick}/>)}
                     
                 </div>

@@ -6,6 +6,10 @@ import {useForm} from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '@/schemas/auth.schema';
 import { TLogin } from '@/types/auth.type';
+import { login } from '@/api/auth.api';
+import {useMutation} from "@tanstack/react-query";
+import toast from "react-hot-toast"
+import { useRouter } from 'next/navigation';
 
 // * login schema
 // const loginSchema = yup.object({
@@ -14,7 +18,7 @@ import { TLogin } from '@/types/auth.type';
 // })
 
 const LoginForm = () => {
-
+  const router = useRouter();
   const {register, watch, handleSubmit, formState: {errors}} = useForm({
     defaultValues: {
       email: "",
@@ -22,11 +26,29 @@ const LoginForm = () => {
     },
     resolver: yupResolver(loginSchema)
   })
- 
-   const onSubmit = ((data: TLogin)=>{
-    console.log("login submitted", data);
 
+  const { data, isPending, error, mutate} = useMutation({
+    mutationFn: login,
+    mutationKey: ["login"],
+    onSuccess: (data)=>{
+      toast.success(data?.message ?? "Login success");
+      // stack ma top ma rakhxa paxi back garda prev page ma lagxa
+      // replace completey trplace
+      // router.push()
+      router.replace('/');
+      // console.log("on success")
+      // console.log(data)
+    },
+    onError: (error: any)=>{
+      toast.error(error?. message ?? "Login failed")
+      console.log("on error")
+      console.log(error)
+    }
   })
+ 
+   const onSubmit = async (data: TLogin)=>{
+    mutate(data);
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'  >
         <Input
