@@ -10,6 +10,7 @@ import { login } from '@/api/auth.api';
 import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast"
 import { useRouter } from 'next/navigation';
+import { All_Admins } from '@/types/enum.types';
 
 // * login schema
 // const loginSchema = yup.object({
@@ -35,7 +36,12 @@ const LoginForm = () => {
       // stack ma top ma rakhxa paxi back garda prev page ma lagxa
       // replace completey trplace
       // router.push()
-      router.replace('/');
+      if(All_Admins.includes(data.data.role)){
+        router.replace("/admin")
+      }else{
+          router.replace('/');
+      }
+      
       // console.log("on success")
       // console.log(data)
     },
