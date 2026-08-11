@@ -1,8 +1,11 @@
+import CategoriesList from "@/components/landing/category";
+import Hero from "@/components/landing/hero";
 
 export default function Home() {
   return (
     <main>
-      <h1>Hello World</h1>
+      <Hero/>
+      <CategoriesList/>
     </main>
   );
 }
