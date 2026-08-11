@@ -26,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="tracking-wider  h-full flex flex-col">
         <ClientQueryClientProvider>
+
           {children}
         
         </ClientQueryClientProvider>

@@ -3,9 +3,9 @@ import React from 'react'
 const ProductPage = () => {
   return (
     <main>
-        <h1>Product Page</h1>
+      Product Page
     </main>
   )
 }
 
-export default ProductPage;
+export default ProductPage
