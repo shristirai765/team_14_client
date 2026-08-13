@@ -3,6 +3,13 @@
 
 import api from ".";
 
+export const createCategory = async(data: FormData)=>{
+
+    const response = await api.post("/categories",data);
+
+    return response.data;
+};
+
 export const getAllCategories = async() =>{
     try{
 

@@ -6,6 +6,8 @@ const api = axios.create({
     // headers:{
     //     "Content-Type": ""
     // }
+    withCredentials: true,
+
 });
 
 //! interceptor - middleware

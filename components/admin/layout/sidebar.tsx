@@ -6,9 +6,9 @@ const AdminSidebar = () => {
       <h2 className="mb-6 text-xl font-bold"> AdminSidebar </h2>
 
       <nav className="flex flex-col gap-4">
-        <Link href="/admin/brand">Brands</Link>
-        <Link href="/admin/category">Categories</Link>
-        <Link href="/admin/product">Products</Link>
+        <Link href="/admin/brands">Brands</Link>
+        <Link href="/admin/categories">Categories</Link>
+        <Link href="/admin/products">Products</Link>
       </nav>
     </section>
   )};

@@ -1,4 +1,5 @@
 import CategoriesList from "@/components/landing/category";
+import FeaturedProducts from "@/components/landing/featured-products";
 import Hero from "@/components/landing/hero";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <main>
       <Hero/>
       <CategoriesList/>
+      <FeaturedProducts/>
     </main>
   );
 }

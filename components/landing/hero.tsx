@@ -10,7 +10,7 @@ const Hero = () => {
 
             {/* Background Image  */}
             <Image
-                src="/hero.png"
+                src="/off.jpg"
                 alt="Glowora beauty products"
                 fill
                 className="object-cover object-center"
@@ -22,13 +22,12 @@ const Hero = () => {
                 <div className="flex min-h-150 items-center px-10">
                     <div className="max-w-lg">
                         <h1 className="text-4xl font-semibold font-serif leading-tight">
-                            REVEAL YOUR <br />
-                            <span className="text-primary">NATURAL</span> GLOW
+                            EVERY DEVICE & TECH <br />
+                            <span className="text-primary-light">PLUS</span> BEAUTY PRODUCTS & VEHICLES
                         </h1>
 
                         <p className="mt-5 max-w-md text-text-secondary">
-                            Discover skincare that enhances your natural beauty.
-                            Gentle, effective, and made for you.
+                            Discover appliances, laptops for you.
                         </p>
 
                         <Link
