@@ -10,17 +10,17 @@ const api = axios.create({
 
 //! interceptor - middleware
 // request sent hunu agi interceptor use garxa
-api.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
-    console.log("request intercept", config.url)
-    return config;
-  },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
-);
+// api.interceptors.request.use(
+//   function (config) {
+//     // Do something before request is sent
+//     console.log("request intercept", config.url)
+//     return config;
+//   },
+//   function (error) {
+//     // Do something with request error
+//     return Promise.reject(error);
+//   }
+// );
 
 // Add a response interceptor
 // api.interceptors.response.use(
