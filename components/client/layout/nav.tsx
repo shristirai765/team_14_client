@@ -1,9 +1,11 @@
 "use client";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 import { CiShoppingCart } from "react-icons/ci";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import AuthSection from "@/components/common/authsection";
+import { useAuth } from "@/hooks/auth.hook";
 
 
 const NavLinks = [
@@ -27,6 +29,7 @@ const NavLinks = [
 ]
 
 const Nav = () => {
+    const {logout, login} = useAuth;
 
     const router = useRouter();
     const user = {
@@ -54,14 +57,14 @@ const Nav = () => {
                 }
             </div>
             <div className="flex items-center gap-4">
-                <IoIosNotificationsOutline className="text-2xl cursor-pointer text-white" />
+                <IoMdHeart className="text-2xl cursor-pointer text-primary" />
                 <CiShoppingCart
                     onClick={() => {
                         router.push("/cart");
                     }}
                     className="text-2xl cursor-pointer text-white"
                 />
-                <Image
+                {/* <Image
                     src={user.src || "/profile.png"}
                     alt="user profile"
                     height={500}
@@ -69,7 +72,8 @@ const Nav = () => {
                     onClick={() => router.push("/profile")}
                     className="w-10 cursor-pointer text-primary "
 
-                />
+                /> */}
+                <AuthSection/>
             </div>
         </nav>
     );

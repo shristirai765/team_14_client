@@ -5,12 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Button from '@/components/common/button';
 import Image from 'next/image';
+import { TWishlist } from '@/types/wishlist.type';
 
 interface IProps{
     product: IProduct,
 }
 
-const WishListPage = ({product:{cover_image,name, description, category, brand, price, _id}}: IProps) => {
+const WishListPage = () => {
 
     const {isLoading, data} = useQuery({
         queryFn: getAllWishList,
@@ -26,6 +27,8 @@ const WishListPage = ({product:{cover_image,name, description, category, brand, 
     if (!wishlistProducts || wishlistProducts.length === 0) {
         return <div className="p-4 text-gray-500">Your wishlist is empty.</div>;
     }
+
+    console.log(data?.data)
 
     return (
         <div className='container px-4 py-4 w-300'>
@@ -43,18 +46,18 @@ const WishListPage = ({product:{cover_image,name, description, category, brand, 
                     </thead>
                     <tbody className='divide-y divide-gray-400'>
                         {
-                            wishlistProducts.map((product: IProduct)=>(
+                            data?.data[0].product?.map((product: IProduct)=>(
                                 <tr key={product._id} className='hover:bg-amber-100  divide-x'>
                                     <td className='hover:bg-amber-50 whitespace-nowrap px-6 py-4 font-md text-gray-900'>{product.name}</td>
                                     <Image
-                                        src={cover_image?.path || '/placeholder-hero.jpg'}
+                                        src={product.cover_image?.path || '/placeholder-hero.jpg'}
                                         alt={name + "-" + "cover image"}
                                         height={800}
                                         width={800}
                                         className='w-full h-full rounded-t-md'
                                     />
                                     {/* <td className='hover:bg-amber-50 whitespace-nowrap px-6 py-4 font-md text-gray-900'>{product.cover_image}</td> */}
-                                    <td className='hover:bg-amber-50 whitespace-nowrap px-6 py-4 font-md text-gray-900'></td>
+                                    {/* <td className='hover:bg-amber-50 whitespace-nowrap px-6 py-4 font-md text-gray-900'></td> */}
                                     <td className='hover:bg-amber-50 whitespace-nowrap px-6 py-4 font-md text-gray-900'>{product.price}</td>
                                     <td>
                                         <div className='flex gap-3'>
