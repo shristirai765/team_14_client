@@ -18,6 +18,6 @@ const initialValue : TAuthContext = {
     logout: ()=>{}
 }
 
-const authContext = createContext<TAuthContext>(initialValue);
+const AuthContext = createContext<TAuthContext>(initialValue);
 
-export default authContext;
+export default AuthContext;

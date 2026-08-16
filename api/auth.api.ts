@@ -4,7 +4,21 @@ import { TRegister } from "@/types/register.type";
 import api from ".";
 
 
-export const login = async (data: TLogin)=>{
+
+export const getProfile = async ()=>{
+   try{
+     const response = await api.get("/auth/me");
+        
+        console.log(response);
+        return response.data;
+   }catch(error: any){
+    console.log(error);
+    throw error.response.data;
+   }
+
+}
+
+export const loginUser = async (data: TLogin)=>{
    try{
      const response = await api.post("/auth/login",
             data,
@@ -34,7 +48,7 @@ export const register = async (data: TRegister)=>{
 
 }
 
-export const logout = async ()=>{
+export const logoutUser = async ()=>{
    try{
       const response = await api.post("/auth/logout");
       return response.data;
