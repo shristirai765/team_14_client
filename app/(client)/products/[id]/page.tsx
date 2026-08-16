@@ -1,4 +1,5 @@
 import AllProductList from '@/components/landing/featured-products/all-list'
+import SelectedListProduct from '@/components/landing/featured-products/select-list'
 import React from 'react'
 
 const ProductDetailPage = () => {
@@ -11,7 +12,8 @@ const ProductDetailPage = () => {
         <p className="text-sm text-text-secondary">Explore all our products</p>
       </div>
 
-      {/* All products */}
+      All products
+      {/* <SelectedListProduct/> */}
       {/* <AllProductList /> */}
     </section>
   )

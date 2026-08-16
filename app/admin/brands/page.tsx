@@ -8,8 +8,7 @@ const BrandPage = () => {
   return (
     <main>
         <BrandForm/>
-        <CategoryForm/>
-        <ProductForm/>
+      
     </main>
   )
 }

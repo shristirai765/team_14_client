@@ -7,6 +7,17 @@ export const createProduct = async (data: FormData) => {
   return response.data;
 };
 
+// get by id
+export const getById = async (id:string)=>{
+  try{
+    const response = await api.get(`/products/${id}`);
+    return response?.data;
+  }catch(error: any){
+    // console.log(error)
+    throw error?.response?.data;
+  }
+}
+
 //* get all products
 
 export const getAllProducts = async()=>{

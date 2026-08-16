@@ -2,9 +2,9 @@ import React from 'react'
 
 const AdminHeader = () => {
     return (
-        <nav className='bg-[#0F172A] text-white fixed top-0 w-full h-16 border-b border-gray-300 shadow-sm z-50 '>
-            Header
-        </nav>
+        <div className=' text-black w-full h-16'>
+            <h1 className='p-4 pl-10 text-3xl font-bold'>Dashboard</h1>
+        </div>
     )
 }
 

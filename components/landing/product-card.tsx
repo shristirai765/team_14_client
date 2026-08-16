@@ -1,22 +1,46 @@
 import { IProduct } from '@/types/product.type'
 import Image from 'next/image';
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { TbCurrencyRupeeNepalese } from "react-icons/tb";
 import Button from '../common/button';
 import Link from 'next/link';
+import { FaRegHeart } from "react-icons/fa6";
+import { IoMdHeart } from "react-icons/io";
+import WishListContext from '@/contexts/wishlist.context';
 
 
 interface IProps{
-    product: IProduct
+    product: IProduct,
 }
 const ProductCard = ({product:{cover_image,name, description, category, brand, price, _id}}: IProps) => {
+
+    // use mutation 
+    const {addToWishlist, isExists, isLoading, removeFromWishlist} = useContext(WishListContext);
+    
   return (
-    <Link className='' href={`/products/${_id}?q=${name}&d=${description}`}>
-        <article className='min-w-80 max-w-90 border border-gray-300 p-1.5 rounded-md'>
+    
+        <article className='min-w-80 max-w-90 border border-gray-300 p-1.5 rounded-md relative'>
+
+            {/* add to wishlist */}
+                <button
+                    disabled = {isLoading} 
+                    onClick={(e)=>{
+                        e.stopPropagation()
+                        if(isExists(_id)){
+                            removeFromWishlist(_id);
+                        }else{
+                            addToWishlist(_id);
+                        }
+                    }}
+                    title={isExists(_id) ? "remove from wishList": 'add to wishlist' }
+                    className='border border-primary w-fit absolute top-2 right-3 z-100 h-12 aspect-square bg-primary/20 rounded-full flex justify-center items-center'
+                >
+                    {isExists(_id) ? <IoMdHeart size={24} className='text-primary' /> : <FaRegHeart size={22} className='text-gray-800' />}
+                </button>
             {/* image: cover image */}
             <div className='w-full h-50 aspect-video border border-primary/50 rounded-md'>
                 <Image
-                    src={cover_image.path}
+                    src={cover_image?.path || '/placeholder-hero.jpg'}
                     alt={name + "-" + "cover image"}
                     height={800}
                     width={800}
@@ -39,11 +63,12 @@ const ProductCard = ({product:{cover_image,name, description, category, brand, p
                 {/* desc */}
                 <p className='line-clamp-3 text-sm leading-4.5 mb-4 text-gray-500'>{description}</p>
             </div>
-
-            {/* button */}
-            <Button label='View Detail'/>
+            <Link className='' href={`/products/${_id}?q=${name}&d=${description}`}>
+                {/* button */}
+                <Button label='View Detail' />
+            </Link>
         </article>
-    </Link>
+    
   )
 }
 
