@@ -1,12 +1,11 @@
 import { IProduct } from '@/types/product.type'
 import Image from 'next/image';
-import React, { useContext, useState } from 'react'
 import { TbCurrencyRupeeNepalese } from "react-icons/tb";
 import Button from '../common/button';
 import Link from 'next/link';
 import { FaRegHeart } from "react-icons/fa6";
 import { IoMdHeart } from "react-icons/io";
-import WishListContext from '@/contexts/wishlist.context';
+import { useWishlist } from '@/hooks/wishlist.hook';
 
 
 interface IProps{
@@ -15,7 +14,8 @@ interface IProps{
 const ProductCard = ({product:{cover_image,name, description, category, brand, price, _id}}: IProps) => {
 
     // use mutation 
-    const {addToWishlist, isExists, isLoading, removeFromWishlist} = useContext(WishListContext);
+    // const {addToWishlist, isExists, isLoading, removeFromWishlist} = useContext(WishListContext);
+    const {addToWishlist, isExists, isLoading, removeFromWishlist} = useWishlist();
     
   return (
     

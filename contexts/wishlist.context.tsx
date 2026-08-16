@@ -11,7 +11,7 @@ type TWishlistContext = {
     addToWishlist : (productId: string)=> void,
     removeFromWishlist : (productId: string)=> void,
     isExists : (productId: string) => boolean,
-    isLoading: Boolean
+    isLoading: boolean
 }
 const initialValue : TWishlistContext = {
     wishlist: null,
