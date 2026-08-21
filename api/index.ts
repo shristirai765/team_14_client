@@ -2,7 +2,7 @@ import axios from "axios";
 
 // create axios instance
 const api = axios.create({
-    baseURL: "http://localhost:8080/api/v1/",
+    baseURL: "https://mern-project-server-ngeb.onrender.com/api/v1/",
     // headers:{
     //     "Content-Type": ""
     // }
