@@ -29,13 +29,13 @@ const NavLinks = [
 ]
 
 const Nav = () => {
-    const {logout, login} = useAuth;
+    const {user} = useAuth();
 
     const router = useRouter();
-    const user = {
-        src: "",
-        alt: "",
-    };
+    // const user = {
+    //     src: "",
+    //     alt: "",
+    // };
     return (
         <nav className="flex flex-none justify-between items-center bg-[#0F172A] px-30 h-18">
             <div>
@@ -56,7 +56,7 @@ const Nav = () => {
                     })
                 }
             </div>
-            <div className="flex items-center gap-4">
+            {!!!user ? <div className="flex items-center gap-4">
                 <IoMdHeart className="text-2xl cursor-pointer text-primary" />
                 <CiShoppingCart
                     onClick={() => {
@@ -74,10 +74,23 @@ const Nav = () => {
 
                 /> */}
                 <AuthSection/>
-            </div>
+            </div>: <LoginSection/>}
         </nav>
     );
 };
+
+const LoginSection = ()=>{
+    return(
+        <div className="flex gap-2 items-center">
+            <Link className="" href={"/login"}>
+                <p className="w-25 text-center py-3 rounded text-lg font-bold px-2 bg-primary text-white">Login</p>
+            </Link>
+            <Link className="w-25 text-center py-3 rounded text-lg font-bold px-2 bg-white text-primary" href={"/sign-up"}>
+                <p >Sign up</p>
+            </Link>
+        </div>
+    )
+}
 
 export default Nav;
 

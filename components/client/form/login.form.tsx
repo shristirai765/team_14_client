@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '@/schemas/auth.schema';
 import { TLogin } from '@/types/auth.type';
-import { login } from '@/api/auth.api';
+import { loginUser } from '@/api/auth.api';
 import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast"
 import { useRouter } from 'next/navigation';
@@ -29,7 +29,7 @@ const LoginForm = () => {
   })
 
   const { data, isPending, error, mutate} = useMutation({
-    mutationFn: login,
+    mutationFn: loginUser,
     mutationKey: ["login"],
     onSuccess: (data)=>{
       toast.success(data?.message ?? "Login success");
