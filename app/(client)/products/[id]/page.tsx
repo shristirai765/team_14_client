@@ -14,7 +14,7 @@ const ProductDetailPage = () => {
 
       All products
       {/* <SelectedListProduct/> */}
-      {/* <AllProductList /> */}
+      <AllProductList />
     </section>
   )
 }

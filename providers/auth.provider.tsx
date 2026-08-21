@@ -1,60 +1,72 @@
-"use client"
-import { getProfile, loginUser, logoutUser } from '@/api/auth.api'
-import AuthContext from '@/contexts/auth.context'
-import { TLogin } from '@/types/auth.type'
-import { useMutation, useQuery } from '@tanstack/react-query'
+'use client'
+import { addToWishList, getAllWishList, removeWishList } from '@/api/wishList.api'
+import WishlistContext from '@/contexts/wishlist.context'
+import { IProduct } from '@/types/product.type'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
-const AuthProvider = ({children}: {children: React.ReactNode}) => {
-
-    const {data, isLoading} = useQuery({
-        queryFn: getProfile ,
-        queryKey: ['auth', 'me'],
+const WishlistProvider = ({ children }: { children: React.ReactNode }) => {
+    const queryClient = useQueryClient()
+    const { isLoading, data } = useQuery({
+        queryFn: getAllWishList,
+        queryKey: ['get-wishlist'],
         retry: false,
-        refetchInterval: 5* 60 * 1000,
-        refetchOnWindowFocus: true
     })
 
-    const {mutate: logoutMutation, isPending} = useMutation({
-        mutationFn: logoutUser,
-        onSuccess: (response)=>{
-            toast.success(response.message ?? "logout successful")
+    const { mutate: create, isPending: createPending } = useMutation({
+        mutationFn: addToWishList,
+        onSuccess: (response) => {
+            toast.success(response.message ?? 'product added to wishlist')
+            queryClient.invalidateQueries({ queryKey: ['get-wishlist'], })
         },
-        onError: (error:any)=>{
-            toast.error(error.message ?? "something went wrong")
-        }
-    })
-    const {mutate: loginMutation, isPending: loginPending} = useMutation({
-        mutationFn: loginUser,
-        onSuccess: (response)=>{
-            toast.success(response.message ?? "login successful")
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (error: any) => {
+            toast.error(error.message ?? 'something went wrong')
         },
-        onError: (error:any)=>{
-            toast.error(error.message ?? "something went wrong")
-        }
     })
-    const logout = ()=>{
-        logoutMutation();
+
+    const { mutate: remove, isPending: removePending } = useMutation({
+        mutationFn: removeWishList,
+        onSuccess: (response) => {
+            toast.success(response.message ?? 'product removed wishlist')
+            queryClient.invalidateQueries({ queryKey: ['get-wishlist'], })
+
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onError: (error: any) => {
+            toast.error(error.message ?? 'something went wrong')
+        },
+    })
+
+
+
+    const addToWishlist = (productId: string) => {
+        create(productId)
     }
-    const login = (data: TLogin)=>{
-        loginMutation(data);
+
+    const removeFromWishlist = (productId: string) => {
+        remove(productId)
     }
-    const registerUser = ()=>{
-        
+
+    const isExists = (productId: string) => {
+        const list = data?.data?.products?.find((product: IProduct) => product._id === productId)
+        return !!list
     }
-    
-  return (
-    <AuthContext value={{
-        isLoading: !!isLoading || !!isPending,
-        login,
-        logout,
-        registerUser,
-        user: data?.data ?? null
-    }}>
-        {children}
-      
-    </AuthContext>
-  )
+
+
+
+    return (
+        <WishlistContext.Provider value={{
+            wishlist: data?.data,
+            addToWishlist,
+            isLoading: !!isLoading || !!removePending || !!createPending,
+            removeFromWishlist,
+            isExists,
+        }}>
+            {children}
+
+        </WishlistContext.Provider>
+    )
 }
 
-export default AuthProvider
+export default WishlistProvider
