@@ -1,12 +1,12 @@
 import { getAllWishList, addToWishList, removeWishList } from '@/api/wishList.api'
 import WishListContext from '@/contexts/wishlist.context'
 import { TWishlist } from '@/types/wishlist.type'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import {  useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { Children } from 'react'
 import toast from 'react-hot-toast'
 
 const WishlistProvider = ({children}: Readonly<{children: React.ReactNode}>) => {
-
+    const queryClient = useQueryClient()
     const {data, isLoading} = useQuery({
         queryFn: getAllWishList,
         queryKey: ["get-wish-list"]
@@ -16,6 +16,7 @@ const WishlistProvider = ({children}: Readonly<{children: React.ReactNode}>) => 
         mutationFn: addToWishList,
         onSuccess: (response)=>{
             toast.success(response.message ?? "product added to wishlist")
+            queryClient.invalidateQueries({queryKey: ["get-wish-list"]})
         },
         onError: (error:any)=>{
             toast.error(error.message ?? "something went wrong")
@@ -26,6 +27,8 @@ const WishlistProvider = ({children}: Readonly<{children: React.ReactNode}>) => 
         mutationFn: removeWishList,
         onSuccess: (response)=>{
             toast.success(response.message ?? "product removed from wishlist")
+            queryClient.invalidateQueries({queryKey: ["get-wish-list"]})
+
         },
         onError: (error:any)=>{
             toast.error(error.message ?? "something went wrong")
