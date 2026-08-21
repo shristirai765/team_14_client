@@ -33,7 +33,7 @@ const ProductCard = ({product:{cover_image,name, description, category, brand, p
                         }
                     }}
                     title={isExists(_id) ? "remove from wishList": 'add to wishlist' }
-                    className='border border-primary w-fit absolute top-2 right-3 z-100 h-12 aspect-square bg-primary/20 rounded-full flex justify-center items-center'
+                    className='border border-primary w-fit absolute top-2 right-3 z-100 h-12 aspect-square bg-primary/20 rounded-full flex justify-center items-center cursor-pointer'
                 >
                     {isExists(_id) ? <IoMdHeart size={24} className='text-primary' /> : <FaRegHeart size={22} className='text-gray-800' />}
                 </button>
